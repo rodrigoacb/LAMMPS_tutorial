@@ -24,7 +24,7 @@ Como alternativa também é possível instala-lo a partir do código fonte:
 ```
 
 Pronto! agora provavelmente você já pode verificar se o lammps esta instalado no seu sistema. Se optou pela primeira instalação pode digitar
-`lmp-daily` e verificar se o LAMMPS foi instalado, caso tenha escolhido a segunda tente `lammps` ou `lmp`. Para liberaro terminal pressione
+`lmp-daily` e verificar se o LAMMPS foi instalado, caso tenha escolhido a segunda tente `lammps` ou `lmp`. Para liberar o terminal pressione
 `Ctrl+c`
 
 #### Input file
