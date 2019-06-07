@@ -1,0 +1,40 @@
+# TraPPE UA Ethane
+
+# Initialization
+units		real
+atom_style	full
+
+variable	NRUN	equal 10000
+variable	VPRES	equal 100.0
+variable	VTEMP	equal 300.0
+variable	AVOGAD	equal 6.0221409E23
+variable	A3TOM3	equal 1E-30
+variable	GTOKG	equal 1E-3
+variable	DCONV	equal ${GTOKG}/${AVOGAD}/${A3TOM3}
+variable	DENSITY equal mass(all)*${DCONV}/vol
+
+# Setup simulation box
+boundary	p p p
+read_data	but.data
+include		but.ff
+replicate	10 10 10
+
+# Setup atoms
+velocity	all create ${VTEMP} 352450618
+
+# Settings
+timestep	2.0
+neighbor	2.0 bin
+neigh_modify	every 1 delay 0 check yes
+
+# Operations
+fix		integrate all npt temp ${VTEMP} ${VTEMP} 100.0 iso ${VPRES} ${VPRES} 1000.0
+fix		dens all ave/time 1 1 1 v_DENSITY file dens.dat
+
+# Output
+thermo 		10
+thermo_style	custom step temp press v_DENSITY etotal
+dump		myDump all xyz 10 out.xyz
+
+# Actions
+run		${NRUN}
