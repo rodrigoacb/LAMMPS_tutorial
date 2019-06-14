@@ -2,13 +2,12 @@
 
 ## LAMMPS: Download e instalação
 
-O Large-scale Atomic/Molecular Massively Parallel Simulator [(LAMMPS)](https://lammps.sandia.gov/) não enconta-se disponível no
-repositório base do ubuntu, por isso faz-se necessário a adição via ppa a partir dos seguintes comandos:
+O Large-scale Atomic/Molecular Massively Parallel Simulator [(LAMMPS)](https://lammps.sandia.gov/) enconta-se disponível no
+repositório base do ubuntu, por isso é possível instala-lo a partir dos seguintes comandos:
 
 ```
-    sudo add-apt-repository ppa:gladky-anton/lammps
     sudo apt-get update
-    sudo apt-get install lammps-daily
+    sudo apt-get install lammps
 ```
 Como alternativa também é possível instala-lo a partir do código fonte:
 
@@ -24,8 +23,8 @@ Como alternativa também é possível instala-lo a partir do código fonte:
 ```
 
 Pronto! agora provavelmente você já pode verificar se o lammps esta instalado no seu sistema. Se optou pela primeira instalação pode
-digitar `lmp-daily` e verificar se o LAMMPS foi instalado, caso tenha escolhido a segunda tente `lammps` ou `lmp`. Para liberar o
-terminal pressione `Ctrl+c`
+digitar `lammps` e verificar se o LAMMPS foi instalado, caso tenha escolhido a segunda tente `lammps` ou `lmp`. Para liberar o
+terminal pressione `Ctrl+C`
 
 #### Input file
 
@@ -51,7 +50,7 @@ Data file for TraPPE -UA Butane
 ```
 
 No caso do butano tem-se `4 atoms` que representam 4 sítios *coarse-grain* (2 CH<sub>3</sub> e 2 CH<sub>2</sub>) 3 ligações, 1 ângulo e
-1 diedro. o próximo passo é descrever as dimensões da caixa em que representaremos a molécula.
+1 diedro. O próximo passo é descrever as dimensões da caixa em que representaremos a molécula.
 
 ```
     0.0 6.0 xlo xhi
@@ -96,6 +95,7 @@ Dihedrals
 O segundo arquivo irá conter dados do potencial inter e intramolecular. O potencial intermolécular utilizado será o de Lennard-Jones
 com raio de corte  e correção de longo alcance. Os parâmetros de coeficiente podem ser retirados do artigo original do TraPPE.
 
+
 ```
     pair_style  lj/cut 14.0
     pair_modify tail yes mix arithmetic
@@ -105,6 +105,7 @@ com raio de corte  e correção de longo alcance. Os parâmetros de coeficiente 
 ```
 
 O mesmo pode ser feito pode ser feito para as ligações, ângulos e diedros:
+
 ```
     bond_style  harmonic
     bond_coeff  1 268.0 1.54
@@ -115,6 +116,7 @@ O mesmo pode ser feito pode ser feito para as ligações, ângulos e diedros:
     dihedral_style  opls
     dihedral_coeff  1 1.411 -0.2710 3.145 0.000
 ```
+
 Por último, agora que temos a configuração completa, precisamos estabelecer parâmetros da simulação em si:
 
 ```
@@ -159,4 +161,4 @@ dump        myDump all xyz 10 out.xyz
 # Actions
 run     ${NRUN}
 ```
-
+Para outras moléculas com o potêncial TraPPE visite o [site](http://chem-siepmann.oit.umn.edu/siepmann/trappe/index.html) dos autores!
